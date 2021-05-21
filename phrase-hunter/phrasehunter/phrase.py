@@ -21,7 +21,8 @@ class Phrase:
         hidden_phrase = self.phrase
         for letter in self.phrase:
             if letter != ' ':
-                hidden_phrase = hidden_phrase.replace(letter, '_')
+                if letter != guessed_letter:
+                    hidden_phrase = hidden_phrase.replace(letter, '_')
         print(hidden_phrase)
 
 
