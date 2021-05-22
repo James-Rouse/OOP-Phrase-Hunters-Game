@@ -1,5 +1,5 @@
 class Phrase:
-    """Deals with phrase manipulation for the game."""
+    """Deals with phrase checking and manipulation for the game."""
 
     def __init__(self, chosen_phrase):
         """Recieve phrase for use in game."""
@@ -21,9 +21,4 @@ class Phrase:
 
     def check_complete(self):
         """Check to see if the whole phrase has been guessed."""
-        return self.hidden_phrase == self.phrase 
-
-
-if __name__ == "__main__":
-    phrase_one = Phrase('bruh')
-    phrase_one.check_letter('d')
+        return self.hidden_phrase == self.phrase
