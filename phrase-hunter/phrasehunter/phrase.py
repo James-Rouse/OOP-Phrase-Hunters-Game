@@ -4,14 +4,15 @@ class Phrase:
     def __init__(self, chosen_phrase):
         """Recieve phrase for use in game."""
         self.phrase = chosen_phrase.lower()
+        self.guesses = []
 
     def display(self, guessed_letter):
         """Print the phrase to console with only guessed letters visibile."""
         self.hidden_phrase = self.phrase
         for letter in self.phrase:
-            if letter != " ":
-                if letter != guessed_letter:
-                    self.hidden_phrase = self.hidden_phrase.replace(letter, "_")
+            if letter != " " and letter != guessed_letter and letter not in self.guesses:
+                self.hidden_phrase = self.hidden_phrase.replace(letter, "_")
+                self.guesses.append(guessed_letter)
         print(self.hidden_phrase)
 
     def check_letter(self, guessed_letter):
@@ -20,7 +21,7 @@ class Phrase:
 
     def check_complete(self):
         """Check to see if the whole phrase has been guessed."""
-        return self.hidden_phrase == self.phrase
+        return self.hidden_phrase == self.phrase 
 
 
 if __name__ == "__main__":

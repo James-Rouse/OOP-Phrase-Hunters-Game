@@ -6,8 +6,7 @@
 ## Create an instance of your Game class
 ## Start your game by calling the instance method that starts the game loop
 
-from game import Game
-from phrase import Phrase
+from phrasehunter import game
 
 game_one = game.Game()
 game_one.start()
