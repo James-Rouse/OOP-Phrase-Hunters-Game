@@ -8,17 +8,17 @@ class Game:
     def __init__(self):
         """Instance starting values."""
         self.phrases = [
-        'blowing away',
-        'in the wind',
-        'the brown hat',
-        'my English teacher',
-        'the grocery store',
-        'ran quickly',
-        'has been raining',
-        'on the boat',
-        'above the stove',
-        'around the corner',
-        'hello world']
+            Phrase('blowing away'),
+            Phrase('in the wind'),
+            Phrase('the brown hat'),
+            Phrase('my English teacher'),
+            Phrase('the grocery store'),
+            Phrase('ran quickly'),
+            Phrase('has been raining'),
+            Phrase('on the boat'),
+            Phrase('above the stove'),
+            Phrase('around the corner'),
+            Phrase('hello world')]
         self.active_phrase = None
         self.missed = 0
         self.guesses = []
@@ -29,9 +29,9 @@ class Game:
         self.active_phrase = None
         self.guesses = []
         self.welcome()
-        self.active_phrase = self.get_random_phrase().lower()
-        self.phrase_instance_one = Phrase(self.active_phrase)
-        self.phrase_instance_one.display("")
+        self.active_phrase = self.get_random_phrase()
+        self.active_phrase.guesses = []
+        self.active_phrase.display("")
         self.get_guess()
 
     def get_random_phrase(self):
@@ -44,9 +44,9 @@ class Game:
 
     def get_guess(self):
         """Get guess from user and append it to self.guesses attribute."""
-        while self.phrase_instance_one.check_complete() is not True and self.missed < 5:
+        while self.active_phrase.check_complete() is not True and self.missed < 5:
             self.guess = input("\nGuess a letter: ")
-            self.guess = self.guess.lower()
+            self.guess = self.guess
             try:
                 int(self.guess)
                 print("\nPlease enter a letter, not a number!")
@@ -55,21 +55,24 @@ class Game:
                     self.guess[1]
                     print("\nPlease input only one letter!")
                 except IndexError:
-                    if self.phrase_instance_one.check_letter(self.guess) is False:
+                    self.a_though_z = "abcdefghijklmnopqrstuvwxyz"
+                    if self.guess not in self.a_though_z:
+                        print("\nPlease only enter a letter within a-z!")
+                    elif self.active_phrase.check_letter(self.guess) is False:
                         self.missed += 1
                         self.guesses.append(self.guess)
                         print(f"\nThe phrase doesn't have that letter. You have {5 - self.missed} more misses before you lose!")
-                    elif self.phrase_instance_one.check_letter(self.guess) is True and self.guess not in self.guesses:
+                    elif self.active_phrase.check_letter(self.guess) is True and self.guess not in self.guesses:
                         print("\nYou got one! Here is the updated phrase:\n")
                         self.guesses.append(self.guess)
-                        self.phrase_instance_one.display(self.guess)
-                    elif self.phrase_instance_one.check_letter(self.guess) is True and self.guess in self.guesses:
+                        self.active_phrase.display(self.guess)
+                    elif self.active_phrase.check_letter(self.guess) is True and self.guess in self.guesses:
                         print("\nYou already revealed that letter!")
         self.game_over()
 
     def game_over(self):
         """Display a friendly win or loss message and ask to play again or end game."""
-        if self.phrase_instance_one.check_complete() is True:
+        if self.active_phrase.check_complete() is True:
             print("\nYou did it! You won!")
             self.reset_or_quit()
         else:
@@ -78,10 +81,15 @@ class Game:
 
     def reset_or_quit(self):
         """Reset or quit game."""
-        self.answer = input("\nEnter Y to play again, or anything else to exit! ")
-        self.answer = self.answer.upper()
-        if self.answer == "Y":
-            self.start()
-        else:
-            print("\nThanks for playing!\n")
-            exit()
+        while True:
+            self.answer = input("\nWould you like to play again? Y/N? ")
+            self.answer = self.answer.upper()
+            if self.answer == "Y":
+                self.start()
+                break
+            elif self.answer == "N":
+                print("\nThanks for playing!\n")
+                exit()         
+            else:
+                print("\nPlease enter only Y or N!")
+                continue
