@@ -18,7 +18,7 @@ class Game:
             Phrase("on the boat"),
             Phrase("above the stove"),
             Phrase("around the corner"),
-            Phrase("hello world")]        
+            Phrase("hello world")]
         self.active_phrase = None
         self.missed = 0
         self.guesses = []
@@ -99,7 +99,7 @@ class Game:
                 break
             elif self.answer == "N":
                 print("\nThanks for playing!\n")
-                exit()         
+                exit()
             else:
                 print("\nPlease enter only Y or N!")
                 continue
