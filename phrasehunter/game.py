@@ -54,7 +54,6 @@ class Game:
         """Get guess from user and append it to self.guesses attribute."""
         while self.active_phrase.check_complete() is not True and self.missed < 5:
             self.guess = input("\nGuess a letter: ")
-            self.guess = self.guess
             try:
                 int(self.guess)
                 print("\nPlease enter a letter, not a number!")
