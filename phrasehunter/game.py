@@ -38,7 +38,7 @@ class Game:
     def get_random_phrase(self):
         """Return an unused random phrase from self.phrases. When all are used, the used list resets."""
         self.random_choice = random.choice(self.phrases)
-        if len(self.used_phrases) == 11:
+        if len(self.used_phrases) == len(self.phrases):
             self.used_phrases = []
         while self.phrases.index(self.random_choice) in self.used_phrases:
             self.random_choice = random.choice(self.phrases)
