@@ -18,10 +18,11 @@ class Game:
             Phrase('on the boat'),
             Phrase('above the stove'),
             Phrase('around the corner'),
-            Phrase('hello world')]
+            Phrase('hello world')]         
         self.active_phrase = None
         self.missed = 0
         self.guesses = []
+        self.used_phrases = []
 
     def start(self):
         """Initiate game loop."""
@@ -35,8 +36,15 @@ class Game:
         self.get_guess()
 
     def get_random_phrase(self):
-        """Return a random phrase from self.phrases."""
-        return random.choice(self.phrases)
+        """Return an unused random phrase from self.phrases. When all are used, the used list resets."""
+        self.random_choice = random.choice(self.phrases)
+        if len(self.used_phrases) == 11:
+            self.used_phrases = []
+        while self.phrases.index(self.random_choice) in self.used_phrases:
+            self.random_choice = random.choice(self.phrases)
+        self.phrase_index = self.phrases.index(self.random_choice)
+        self.used_phrases.append(self.phrase_index)
+        return self.random_choice
 
     def welcome(self):
         """Display welcome message."""
