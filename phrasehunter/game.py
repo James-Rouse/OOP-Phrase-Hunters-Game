@@ -64,7 +64,9 @@ class Game:
                     print("\nPlease input only one letter!")
                 except IndexError:
                     self.a_though_z = "abcdefghijklmnopqrstuvwxyz"
-                    if self.guess not in self.a_though_z:
+                    if self.guess == "":
+                        print("\nYou didn't enter anything!")
+                    elif self.guess not in self.a_though_z:
                         print("\nPlease only enter a letter within a-z!")
                     elif self.active_phrase.check_letter(self.guess) is False:
                         self.missed += 1
