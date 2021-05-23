@@ -8,17 +8,17 @@ class Game:
     def __init__(self):
         """Instance starting values."""
         self.phrases = [
-            Phrase('blowing away'),
-            Phrase('in the wind'),
-            Phrase('the brown hat'),
-            Phrase('my English teacher'),
-            Phrase('the grocery store'),
-            Phrase('ran quickly'),
-            Phrase('has been raining'),
-            Phrase('on the boat'),
-            Phrase('above the stove'),
-            Phrase('around the corner'),
-            Phrase('hello world')]         
+            Phrase("blowing away"),
+            Phrase("in the wind"),
+            Phrase("the brown hat"),
+            Phrase("my English teacher"),
+            Phrase("the grocery store"),
+            Phrase("ran quickly"),
+            Phrase("has been raining"),
+            Phrase("on the boat"),
+            Phrase("above the stove"),
+            Phrase("around the corner"),
+            Phrase("hello world")]        
         self.active_phrase = None
         self.missed = 0
         self.guesses = []
