@@ -32,7 +32,7 @@ class Game:
         self.welcome()
         self.active_phrase = self.get_random_phrase()
         self.active_phrase.guesses = []
-        self.active_phrase.display("")
+        self.active_phrase.display("", "")
         self.get_guess()
 
     def get_random_phrase(self):
@@ -56,42 +56,41 @@ class Game:
             self.guess = input("\nGuess a letter: ")
             try:
                 int(self.guess)
-                print("\nPlease enter a letter, not a number!")
+                self.active_phrase.display(self.guess, "Please enter a letter, not a number!")
             except ValueError:
                 try:
                     self.guess[1]
-                    print("\nPlease input only one letter!")
+                    self.active_phrase.display(self.guess, "Please input only one letter!")
                 except IndexError:
                     self.a_though_z = "abcdefghijklmnopqrstuvwxyz"
                     if self.guess == "":
-                        print("\nYou didn't enter anything!")
+                        self.active_phrase.display(self.guess, "You didn't enter anything!")
                     elif self.guess not in self.a_though_z:
-                        print("\nPlease only enter a letter within a-z!")
+                        self.active_phrase.display(self.guess, "Please only enter a letter within a-z!")
                     elif self.active_phrase.check_letter(self.guess) is False:
                         self.missed += 1
                         self.guesses.append(self.guess)
-                        print(f"\nThe phrase doesn't have that letter. You have {5 - self.missed} more misses before you lose!")
+                        self.active_phrase.display(self.guess, f"The phrase doesn't have that letter. You have {5 - self.missed} more misses before you lose!")
                     elif self.active_phrase.check_letter(self.guess) is True and self.guess not in self.guesses:
-                        print("\nYou got one! Here is the updated phrase:\n")
                         self.guesses.append(self.guess)
-                        self.active_phrase.display(self.guess)
+                        self.active_phrase.display(self.guess, "You got one!")
                     elif self.active_phrase.check_letter(self.guess) is True and self.guess in self.guesses:
-                        print("\nYou already revealed that letter!")
+                        self.active_phrase.display(self.guess, "You already revealed that letter!")
         self.game_over()
 
     def game_over(self):
         """Display a friendly win or loss message and ask to play again or end game."""
         if self.active_phrase.check_complete() is True:
-            print("\nYou did it! You won!")
+            print("\nYou did it! You won!\n")
             self.reset_or_quit()
         else:
-            print("\nSorry! You lost!")
+            print("\nSorry! You lost!\n")
             self.reset_or_quit()
 
     def reset_or_quit(self):
         """Reset or quit game."""
         while True:
-            self.answer = input("\nWould you like to play again? Y/N? ")
+            self.answer = input("Would you like to play again? Y/N? ")
             self.answer = self.answer.upper()
             if self.answer == "Y":
                 self.start()
@@ -100,5 +99,5 @@ class Game:
                 print("\nThanks for playing!\n")
                 exit()
             else:
-                print("\nPlease enter only Y or N!")
+                print("\nPlease enter only Y or N!\n")
                 continue

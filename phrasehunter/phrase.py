@@ -6,13 +6,15 @@ class Phrase:
         self.phrase = chosen_phrase.lower()
         self.guesses = []
 
-    def display(self, guessed_letter):
+    def display(self, guessed_letter, output_string):
         """Print the phrase to console with only guessed letters visibile."""
         self.hidden_phrase = self.phrase
         for letter in self.phrase:
             if letter != " " and letter != guessed_letter and letter not in self.guesses:
                 self.hidden_phrase = self.hidden_phrase.replace(letter, "_")
                 self.guesses.append(guessed_letter)
+        if output_string != "":
+            print(f"\n{output_string}\n")
         print(self.hidden_phrase)
 
     def check_letter(self, guessed_letter):
